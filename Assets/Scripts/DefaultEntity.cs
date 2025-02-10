@@ -24,7 +24,7 @@ public class DefaultEntity : MonoBehaviour
 
     }
 
-    protected virtual int Randomizer(int minNumber, int maxNumber)
+    protected int Randomizer(int minNumber, int maxNumber)
     {
         int randomNumber=Random.Range(minNumber, maxNumber);
         Debug.Log("Number was randomized between: " + minNumber + " " + maxNumber + ". The random number is: " + randomNumber);

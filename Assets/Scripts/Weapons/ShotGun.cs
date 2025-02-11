@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class ShotGun : MonoBehaviour
 {
-    private int lives;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,20 +14,5 @@ public class Player : MonoBehaviour
     void Update()
     {
         
-    }
-
-    private void EndGame()
-    {
-
-    }
-
-    protected virtual void Input()
-    {
-
-    }
-
-    protected virtual void SwapWeapon()
-    {
-
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour
+public class SpawnWeapons : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class RangedEnemy : MonoBehaviour
         
     }
 
-    protected void MoveToFire()
+    public void SpawnWeapon()
     {
         
     }

@@ -17,11 +17,16 @@ public class DefaultEntity : MonoBehaviour
     {
         
     }
-
+   
+    protected virtual void Death()
+    {
+        //Default settings for an entity's death
+        //debug what died
+        //Destroy object
+    }
     protected virtual void Move(Vector3 targetLocation, Vector3 currentLocation)
     {
         //moves from the currentLocation to the targetLocation gradually.
-
     }
 
     protected int Randomizer(int minNumber, int maxNumber)
@@ -31,8 +36,4 @@ public class DefaultEntity : MonoBehaviour
         return randomNumber;
     }
 
-    protected virtual void Attack()
-    {
-
-    }
 }

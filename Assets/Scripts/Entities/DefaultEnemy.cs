@@ -17,15 +17,6 @@ public class DefaultEnemy : DefaultEntity
         
     }
 
-    protected virtual void Death()
-    {
-        if (health<=0)
-        {
-            DropAmmo();
-            //destroy this
-
-        }
-    }
 
     protected void FindPlayer()
     {

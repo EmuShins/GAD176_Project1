@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IEntity
 {
-    void IAttack();
+    public void IAttack();
 
 
 }

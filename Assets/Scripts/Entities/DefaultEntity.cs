@@ -10,7 +10,7 @@ public class DefaultEntity : MonoBehaviour , IEntity
     
     void Start()
     {
-        
+    
     }
 
     void Update()
@@ -32,6 +32,9 @@ public class DefaultEntity : MonoBehaviour , IEntity
     protected virtual void Move(Vector3 targetLocation, Vector3 currentLocation)
     {
         //moves from the currentLocation to the targetLocation gradually.
+        Vector3 moveTo=Vector3.Lerp(currentLocation,targetLocation,moveSpeed*Time.deltaTime).normalized;
+        transform.position+=moveTo*moveSpeed*Time.deltaTime;
+        
     }
 
     protected void TakeDamage(int damageReceieved)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : DefaultEntity
 {
-    private int lives;
+    private int lives=3;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,11 @@ public class Player : DefaultEntity
 
     private void EndGame()
     {
+        if(lives<=0)
+        {
+            Debug.Log("Oh no, the player ran out of lives! The game has ended.");
+            Time.timeScale=0;
+        }
 
     }
 

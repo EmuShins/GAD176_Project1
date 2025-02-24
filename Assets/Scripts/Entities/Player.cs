@@ -7,6 +7,13 @@ public class Player : DefaultEntity, IPlayer
     private int lives=3;
     private float moveDistance = 10f;
     private float currentPosition;
+
+    //Used for mouse and moving the camera
+    private Vector3 mousePos;
+    protected  float yRotation=0f;
+    private float mouseSensitivity=2f;
+    public GameObject playerCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +41,7 @@ public class Player : DefaultEntity, IPlayer
 
     public void IGetInput()
     {
+        //Simple WASD movement
         if (Input.GetKey(KeyCode.W))
         {
             currentPosition=transform.position.z;
@@ -64,6 +72,9 @@ public class Player : DefaultEntity, IPlayer
             currentPosition=IMovePlayer(currentPosition-moveDistance,currentPosition);
             transform.position=new Vector3(currentPosition,transform.position.y,transform.position.z);
         }
+        //Moves the camera depending on where the mouse is on the screen.
+        MoveCamera();
+        Debug.Log("mousePos is: " + mousePos);
     }
     #endregion
 
@@ -71,6 +82,7 @@ public class Player : DefaultEntity, IPlayer
     {
 
     }
+    
     //Performs the Lerp calculations used to move the player. Called from IGetInput.
     #region IMovePlayer
     public float IMovePlayer(float moveTo, float moveFrom)
@@ -80,5 +92,18 @@ public class Player : DefaultEntity, IPlayer
         return newPos;
     }
     #endregion
+    //Moves the camera according to where the mouse cursor is on the screen. Called from IGetInput.
+    #region MoveCamera
+    private void MoveCamera()
+    {
+        float mouseX=Input.GetAxis("Mouse X")*mouseSensitivity;
+        float mouseY=Input.GetAxis("Mouse Y")*mouseSensitivity;
 
+        yRotation-=mouseY;
+        yRotation= Mathf.Clamp(yRotation, -90f, 90f);
+        playerCamera.transform.localEulerAngles= Vector3.right* yRotation;
+
+        player.transform.Rotate(Vector3.up * mouseX);
+    }
+    #endregion
 }

@@ -7,9 +7,10 @@ public class DefaultEntity : MonoBehaviour , IEntity
     protected int health=100;
     protected float moveSpeed=1f;
     protected Vector3 location;
+    public GameObject player;
     void Start()
     {
-        
+
     }
 
     void Update()

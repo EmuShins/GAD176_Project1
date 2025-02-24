@@ -7,6 +7,8 @@ public class DefaultEntity : MonoBehaviour , IEntity
     protected int health=100;
     protected float moveSpeed=1f;
     protected Vector3 location;
+    protected Vector3 playerLocation;
+    protected Vector3 playerRotation;
     
     void Start()
     {
@@ -29,11 +31,13 @@ public class DefaultEntity : MonoBehaviour , IEntity
         //Destroy object
     }
 
-    protected virtual void Move(Vector3 targetLocation, Vector3 currentLocation)
+    protected virtual Vector3 Move(Vector3 targetLocation, Vector3 currentLocation)
     {
         //moves from the currentLocation to the targetLocation gradually.
-        Vector3 moveTo=Vector3.Lerp(currentLocation,targetLocation,moveSpeed*Time.deltaTime).normalized;
-        transform.position+=moveTo*moveSpeed*Time.deltaTime;
+        //.normalized might need to be removed in the future because it may affect the move speed.
+        Vector3 moveTo=Vector3.Lerp(currentLocation,targetLocation,moveSpeed*Time.deltaTime);
+        transform.position += moveTo * moveSpeed * Time.deltaTime;
+        return moveTo;
         
     }
 

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : DefaultEntity
+public class Player : DefaultEntity, IPlayer
 {
     private int lives=3;
+    private float moveDistance = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,7 @@ public class Player : DefaultEntity
     // Update is called once per frame
     void Update()
     {
-        
+        IGetInput();
     }
 
     private void EndGame()
@@ -27,9 +28,27 @@ public class Player : DefaultEntity
 
     }
 
-    protected virtual void Input()
+    public void IGetInput()
     {
-
+        playerLocation = transform.position;
+        
+        if (Input.GetKey(KeyCode.W))
+        {
+            Debug.Log("Player has pressed W.");
+           
+        }
+        else if(Input.GetKey(KeyCode.S))
+        {
+            Debug.Log("Player has pressed S.");
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            Debug.Log("Player has pressed D.");
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            Debug.Log("Player has pressed A.");
+        }
     }
 
     protected virtual void SwapWeapon()

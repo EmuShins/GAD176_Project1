@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IPlayer
 {
-    public void IGetInput();
+     void IGetInput();
+     float IMovePlayer(float moveTo, float moveFrom);
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DefaultWeapon : MonoBehaviour
 {
-    protected int damage;
-    public GameObject[] possibleSpawns=new GameObject[] {};
+    protected int damage=20;
+    protected float range=100f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class DefaultWeapon : MonoBehaviour
         
     }
 
-    protected void Damage()
+    protected void DealDamage()
     {
         
     }

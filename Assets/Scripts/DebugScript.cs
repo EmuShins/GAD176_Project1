@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultWeapon : MonoBehaviour
+public class DebugScript : MonoBehaviour
 {
-    protected int damage=20;
-    protected float range=100f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +16,10 @@ public class DefaultWeapon : MonoBehaviour
         
     }
 
-    protected void DealDamage()
+    public void DrawAGizmo(Vector3 from, Vector3 to)
     {
-        
-    }
+        Gizmos.color= Color.red;
+        Gizmos.DrawLine(from, to);
 
-    public IEnumerator WaitRoutine(int waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
     }
 }

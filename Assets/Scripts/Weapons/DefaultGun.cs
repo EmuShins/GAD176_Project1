@@ -8,17 +8,22 @@ public class DefaultGun : DefaultWeapon, IGun
     protected int magazineSize=10;
     protected int ammo;
     protected int maxAmmo=50;
+    protected float bulletSpeed=10f;
+    protected Vector3 bulletOffset;
+    public GameObject bulletPrefab;
     // Start is called before the first frame update
     void Start()
     {
         ammo=20;
         magazine=5;
+        range=10f;
     }
 
     // Update is called once per frame
     void Update()
     {
         IReload();
+        IShoot();
     }
     //Reloads the gun when pressing R.
     #region IReload
@@ -55,6 +60,28 @@ public class DefaultGun : DefaultWeapon, IGun
 
     public void IShoot()
     {
-        
+        if(Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Left mouse button pressed.");
+            if(magazine>0)
+            {
+                //instantiate the bullet at the right position.
+                bulletOffset=new Vector3(0,0.3f,1);
+               GameObject bullet=Instantiate(bulletPrefab, transform.position+bulletOffset, transform.rotation);
+               Destroy(bullet, 3);
+
+               //give the bullet the right velocity
+               Rigidbody bulletRigid= bullet.GetComponent<Rigidbody>();
+               bulletRigid.velocity = this.transform.forward * bulletSpeed;
+
+               //take the bullet out of the magazine
+               magazine-=1;
+            }
+            else
+            {
+                Debug.Log("There was no ammo left, could not shoot.");
+            }
+        }
     }
+
 }

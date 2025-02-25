@@ -5,18 +5,17 @@ using UnityEngine;
 public class DefaultGun : DefaultWeapon, IGun
 {
     protected int magazine;
-    protected int magazineSize=10;
+    protected int magazineSize;
     protected int ammo;
-    protected int maxAmmo=50;
-    protected float bulletSpeed=10f;
+    protected int maxAmmo;
+    protected int bulletShootAmount;
+    protected float bulletSpeed;
     protected Vector3 bulletOffset;
     public GameObject bulletPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        ammo=20;
-        magazine=5;
-        range=10f;
+       SetGunSpecs();
     }
 
     // Update is called once per frame
@@ -57,7 +56,8 @@ public class DefaultGun : DefaultWeapon, IGun
         }
     }
     #endregion
-
+    //Instantiates the bullet at the bulletOffset, then moves it in a direction with rigidbody velocity.
+    #region IShoot
     public void IShoot()
     {
         if(Input.GetMouseButtonDown(0))
@@ -65,10 +65,43 @@ public class DefaultGun : DefaultWeapon, IGun
             Debug.Log("Left mouse button pressed.");
             if(magazine>0)
             {
+                //saves the original bulletOffset so the next shots won't progressively change position.
+                Vector3 originalOffset= bulletOffset;
+
+                //if there is more than one bullet, move the bulletOffset to create a star pattern.
+                for(int i=0; i<=bulletShootAmount-1; i++)
+                {
+                    switch(i)
+                    {
+                        case 1:
+                        {
+                            bulletOffset= new Vector3(bulletOffset.x+0.3f, bulletOffset.y, bulletOffset.z);
+                            break;
+                        }
+                        case 2:
+                        {
+                            bulletOffset= new Vector3(bulletOffset.x-0.6f, bulletOffset.y, bulletOffset.z);
+                            break;
+                        }
+                        case 3:
+                        {
+                            bulletOffset= new Vector3(bulletOffset.x+0.2f, bulletOffset.y+0.3f, bulletOffset.z);
+                            break;
+                        }
+                        case 4:
+                        {
+                            bulletOffset= new Vector3(bulletOffset.x+0.2f, bulletOffset.y, bulletOffset.z);
+                            break;
+                        }
+                        default:
+                        {
+                            break;
+                        }
+                    }
+
                 //instantiate the bullet at the right position.
-                bulletOffset=new Vector3(0,0.3f,1);
                GameObject bullet=Instantiate(bulletPrefab, transform.position+bulletOffset, transform.rotation);
-               Destroy(bullet, 3);
+               Destroy(bullet, range);
 
                //give the bullet the right velocity
                Rigidbody bulletRigid= bullet.GetComponent<Rigidbody>();
@@ -76,12 +109,29 @@ public class DefaultGun : DefaultWeapon, IGun
 
                //take the bullet out of the magazine
                magazine-=1;
+                }
+                //reset the bulletOffset position.
+                bulletOffset=originalOffset;
             }
             else
             {
                 Debug.Log("There was no ammo left, could not shoot.");
             }
         }
+    }
+    #endregion
+    
+    //called at start to set the various gun's different specs.
+    public virtual void SetGunSpecs()
+    {
+        magazine=10;
+        magazineSize=10;
+        ammo=maxAmmo;
+        maxAmmo=50;
+        bulletShootAmount=1;
+        bulletSpeed=50f;
+        bulletOffset=new Vector3(0,0.3f,1.3f);
+        range=1f;
     }
 
 }

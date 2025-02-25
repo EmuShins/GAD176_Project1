@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefaultWeapon : MonoBehaviour
 {
     protected int damage=20;
-    protected float range=100f;
+    protected float range=1f;
 
     // Start is called before the first frame update
     void Start()

@@ -221,6 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2295579267251036723}
+  - component: {fileID: 6833607575453357734}
   m_Layer: 0
   m_Name: SniperGunPrefab
   m_TagString: Untagged
@@ -246,6 +247,19 @@ Transform:
   - {fileID: 2771705519669409171}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6833607575453357734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175784871617294201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dffac0ea51a6a45915a8fe11ae9f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8405005459170292064, guid: 4464a10250dce6f4fa1f66e795d470fd, type: 3}
 --- !u!1 &6042704346100731860
 GameObject:
   m_ObjectHideFlags: 0

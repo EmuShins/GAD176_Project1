@@ -14,6 +14,7 @@ public class ShotGun : DefaultGun, IGun
     void Update()
     {
         IShoot();
+        IReload();
     }
    
     public override void SetGunSpecs()

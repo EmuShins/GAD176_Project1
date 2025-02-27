@@ -45,13 +45,6 @@ public class DefaultEntity : MonoBehaviour , IEntity
         Death();
     }
 
-    protected int Randomizer(int minNumber, int maxNumber)
-    {
-        int randomNumber=Random.Range(minNumber, maxNumber);
-        Debug.Log("Number was randomized between: " + minNumber + " " + maxNumber + ". The random number is: " + randomNumber);
-        return randomNumber;
-    }
-
     public void IAttack()
     {
 

@@ -7,6 +7,8 @@ public class Player : DefaultEntity, IPlayer
     private int lives=3;
     private float moveDistance = 10f;
     private float currentPosition;
+    public GameObject[] weaponTypes= new GameObject[]{};
+    public GameObject currentEquipped;
 
     //Used for mouse and moving the camera
     private Vector3 mousePos;
@@ -75,11 +77,30 @@ public class Player : DefaultEntity, IPlayer
         //Moves the camera depending on where the mouse is on the screen.
         MoveCamera();
         Debug.Log("mousePos is: " + mousePos);
+       
+        //Handles the shoot, reload and swap weapons input
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+
+        }
+        if(Input.GetMouseButtonDown(0))
+        {
+
+        }
     }
     #endregion
 
-    protected virtual void SwapWeapon()
+    protected void SwapWeapon()
     {
+        foreach(GameObject weapon in weaponTypes)
+        {
+            if(currentEquipped==weapon)
+            {
+               
+
+            }
+
+        }
 
     }
     

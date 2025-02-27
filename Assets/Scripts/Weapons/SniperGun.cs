@@ -13,8 +13,6 @@ public class SniperGun : DefaultGun, IGun
     // Update is called once per frame
     void Update()
     {
-        IShoot();
-        IReload();
     }
 
     public override void SetGunSpecs()

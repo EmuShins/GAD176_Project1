@@ -21,15 +21,12 @@ public class DefaultGun : DefaultWeapon, IGun
     // Update is called once per frame
     void Update()
     {
-        IReload();
-        IShoot();
+
     }
     //Reloads the gun when pressing R.
     #region IReload
     public void IReload()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
            //find how many bullets need to be reloaded into magazine based off of magazine size.
            if(magazine<magazineSize)
            {
@@ -51,17 +48,14 @@ public class DefaultGun : DefaultWeapon, IGun
                 magazine+=reloadAmount;
                 Debug.Log("There was enough ammo to fully reload. the magazine is now: " + magazine + " and the ammo is: " + ammo + ".");
             }
-
            }
-        }
     }
     #endregion
     //Instantiates the bullet at the bulletOffset, then moves it in a direction with rigidbody velocity.
     #region IShoot
     public void IShoot()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
+        
             Debug.Log("Left mouse button pressed.");
             if(magazine>0)
             {
@@ -117,7 +111,6 @@ public class DefaultGun : DefaultWeapon, IGun
             {
                 Debug.Log("There was no ammo left, could not shoot.");
             }
-        }
     }
     #endregion
     

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SpawnWeapons : DefaultWeapon
 {
+    public GameObject spawnVolume;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,27 +18,14 @@ public class SpawnWeapons : DefaultWeapon
         
     }
 
+    //Spawns 5 random weapons, each in random locations.
     public void SpawnWeapon()
     {
-        Vector3 spawnLocation = new Vector3(Randomizer(-50, 50), 0, Randomizer(-50, 50));
-       Instantiate(possibleWeapons[Randomizer(0, possibleWeapons.Length)], spawnLocation, Quaternion.identity);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other==other.GetComponent<Player>())
+        for(int i=0; i<5; i++)
         {
-            Player player= other.GetComponentInParent<Player>();
-            Debug.Log("The player is in range to pick up a weapon.");
-            for(int i =0; i<=possibleWeapons.Length; i++)
-            {
-                if(player.currentEquipped==possibleWeapons[i])
-            {
-
-
-
-            }
-            }
+            Vector3 spawnLocation = new Vector3(Randomizer(-50, 50), 0, Randomizer(-50, 50));
+            Instantiate(spawnVolume, spawnLocation, Quaternion.identity);
+            Instantiate(possibleWeapons[Randomizer(0, possibleWeapons.Length)], spawnLocation, Quaternion.identity);
         }
     }
 }

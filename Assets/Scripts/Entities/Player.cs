@@ -8,7 +8,7 @@ public class Player : DefaultEntity, IPlayer
     private float moveDistance = 10f;
     private float currentPosition;
     public GameObject[] weaponTypes= new GameObject[]{};
-    public GameObject currentEquipped;
+    public int currentEquipped;
 
     //Used for mouse and moving the camera
     private Vector3 mousePos;
@@ -19,13 +19,14 @@ public class Player : DefaultEntity, IPlayer
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentEquipped=0;
+        ShowWeapon();
     }
 
     // Update is called once per frame
     void Update()
     {
-        IGetInput();
+        IMoveInput();
     }
 
     private void EndGame()
@@ -38,10 +39,10 @@ public class Player : DefaultEntity, IPlayer
 
     }
 
-    //Handles input for the player. This includes movement.
-    #region IGetInput
+    //Handles movement input for the player.
+    #region IMoveInput
 
-    public void IGetInput()
+    public void IMoveInput()
     {
         //Simple WASD movement
         if (Input.GetKey(KeyCode.W))
@@ -75,10 +76,13 @@ public class Player : DefaultEntity, IPlayer
             transform.position=new Vector3(currentPosition,transform.position.y,transform.position.z);
         }
         //Moves the camera depending on where the mouse is on the screen.
-        MoveCamera();
-        Debug.Log("mousePos is: " + mousePos);
-       
-        //Handles the shoot, reload and swap weapons input
+        IMoveCamera();
+        //Debug.Log("mousePos is: " + mousePos);
+    }
+    #endregion
+
+    public void IWeaponInput()
+    {
         if(Input.GetKeyDown(KeyCode.R))
         {
 
@@ -88,21 +92,30 @@ public class Player : DefaultEntity, IPlayer
 
         }
     }
-    #endregion
 
-    protected void SwapWeapon()
+    #region Show/Hide Weapon
+    //Shows the equipped weapon.
+    public void ShowWeapon()
     {
-        foreach(GameObject weapon in weaponTypes)
+        switch (weaponTypes.Length)
         {
-            if(currentEquipped==weapon)
-            {
-               
-
-            }
-
+        case 5:
+        break;
         }
-
     }
+    //Hides the equipped weapon.
+    protected void HideWeapon()
+    {
+        for(int i=0; i<weaponTypes.Length; i++)
+        {
+           /* if(currentEquipped==weaponTypes[i])
+            {
+               weaponTypes[i].SetActive(false);
+            }
+            */
+        }
+    }
+    #endregion
     
     //Performs the Lerp calculations used to move the player. Called from IGetInput.
     #region IMovePlayer
@@ -115,7 +128,7 @@ public class Player : DefaultEntity, IPlayer
     #endregion
     //Moves the camera according to where the mouse cursor is on the screen. Called from IGetInput.
     #region MoveCamera
-    private void MoveCamera()
+    public void IMoveCamera()
     {
         float mouseX=Input.GetAxis("Mouse X")*mouseSensitivity;
         float mouseY=Input.GetAxis("Mouse Y")*mouseSensitivity;

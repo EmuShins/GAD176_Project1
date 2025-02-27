@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface IPlayer
 {
-     void IGetInput();
+     void IMoveInput();
      float IMovePlayer(float moveTo, float moveFrom);
+     void IMoveCamera();
+     void IWeaponInput();
 }

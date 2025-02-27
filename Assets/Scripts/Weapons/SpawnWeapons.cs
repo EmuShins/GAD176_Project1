@@ -9,7 +9,7 @@ public class SpawnWeapons : DefaultWeapon
     // Start is called before the first frame update
     void Start()
     {
-        SpawnWeapon();
+        SpawnWeaponPickup();
     }
 
     // Update is called once per frame
@@ -19,13 +19,12 @@ public class SpawnWeapons : DefaultWeapon
     }
 
     //Spawns 5 random weapons, each in random locations.
-    public void SpawnWeapon()
+    public void SpawnWeaponPickup()
     {
         for(int i=0; i<5; i++)
         {
             Vector3 spawnLocation = new Vector3(Randomizer(-50, 50), 0, Randomizer(-50, 50));
             Instantiate(spawnVolume, spawnLocation, Quaternion.identity);
-            Instantiate(possibleWeapons[Randomizer(0, possibleWeapons.Length)], spawnLocation, Quaternion.identity);
         }
     }
 }

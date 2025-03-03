@@ -20,7 +20,7 @@ public class Player : DefaultEntity, IPlayer
     void Start()
     {
         currentEquipped=0;
-        ShowWeapon();
+        ShowWeapon(currentEquipped);
     }
 
     // Update is called once per frame
@@ -95,24 +95,19 @@ public class Player : DefaultEntity, IPlayer
 
     #region Show/Hide Weapon
     //Shows the equipped weapon.
-    public void ShowWeapon()
+    protected void ShowWeapon(int weapon)
     {
-        switch (weaponTypes.Length)
-        {
-        case 5:
-        break;
-        }
+        weaponTypes[weapon].SetActive(true);
     }
     //Hides the equipped weapon.
-    protected void HideWeapon()
+    protected void HideWeapon(int weapon)
     {
         for(int i=0; i<weaponTypes.Length; i++)
         {
-           /* if(currentEquipped==weaponTypes[i])
+            if(i != weapon)
             {
-               weaponTypes[i].SetActive(false);
+                weaponTypes[i].SetActive(false);
             }
-            */
         }
     }
     #endregion

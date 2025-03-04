@@ -6,6 +6,7 @@ public class DefaultEntity : BaseScript
 {
     protected int health;
     protected float moveSpeed;
+    [SerializeField]
     protected List<GameObject> usableWeapons = new List<GameObject>();
     protected int currentEquipped;
 
@@ -103,17 +104,14 @@ public class DefaultEntity : BaseScript
      
      public void SwapWeapon(int weaponType)
     {
-        if(currentEquipped!=null)
-        {
-            HideWeapon();
-            Debug.Log("The player had something equipped.");
-        }
+        HideWeapon();
 
         currentEquipped=weaponType;
         ShowWeapon();
     }
      protected void ShowWeapon()
     {
+        Debug.Log(usableWeapons[currentEquipped]);
        usableWeapons[currentEquipped].SetActive(true);
     }
 

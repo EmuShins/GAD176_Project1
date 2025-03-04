@@ -21,32 +21,39 @@ public class WeaponPickup : SpawnWeapons
     }
     public void OnTriggerEnter(Collider other)
     {
+        if(thisWeapon!=null)
+        {
         //If the collider is they player, check if they have the same weapon equipped.
         if(other.GetComponent<Player>())
         {
+            Player player=other.GetComponent<Player>();
             Debug.Log("The player is in range to pick up a " + thisWeapon);
 
                 if(thisWeapon.GetComponent<MeleeWeapon>()!=null)
                 {
-                    Debug.Log(thisWeapon);
                     player.SwapWeapon(0);
+                    Debug.Log("Spawning a sword.");
                 }
-                if(thisWeapon.GetComponent<ShotGun>()!=null)
+                else if(thisWeapon.GetComponent<ShotGun>()!=null)
                 {
-                    Debug.Log(thisWeapon);
                     player.SwapWeapon(1);
+                    Debug.Log("Spawning a shotgun.");
                 }
-                if(thisWeapon.GetComponent<SniperGun>()!=null)
+                else if(thisWeapon.GetComponent<SniperGun>()!=null)
                 {
-                    Debug.Log(thisWeapon);
                     player.SwapWeapon(2);
+                    Debug.Log("Spawning a snipergun.");
+                    
                 }
-                if(thisWeapon.GetComponent<DefaultGun>()!=null)
+                else
                 {
-                    Debug.Log(thisWeapon);
                     player.SwapWeapon(3);
+                    Debug.Log("Spawning a pistol.");
+                    
                 }
-
+                Destroy(thisWeapon);
+                Destroy(this.gameObject);
+        }   
         }
     }
 

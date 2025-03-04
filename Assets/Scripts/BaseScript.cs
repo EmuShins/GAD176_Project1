@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class BaseScript : MonoBehaviour
 {
+    public Player player;
+
+    void Awake()
+    {
+
+    }
     // Start is called before the first frame update
     void Start()
     {

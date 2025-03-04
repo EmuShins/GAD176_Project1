@@ -6,7 +6,6 @@ public class DefaultWeapon : BaseScript
 {
     protected int damage=20;
     protected float range=1f;
-    public GameObject[] possibleWeapons = new GameObject[]{};
    
     // Start is called before the first frame update
     void Start()
@@ -29,4 +28,5 @@ public class DefaultWeapon : BaseScript
     {
         yield return new WaitForSeconds(waitTime);
     }
+
 }

@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultEntity : MonoBehaviour , IEntity
+public class DefaultEntity : BaseScript
 {
-    protected int health=100;
-    protected float moveSpeed=1f;
-    protected Vector3 location;
-    public GameObject player;
+    protected int health;
+    protected float moveSpeed;
+    protected List<GameObject> usableWeapons = new List<GameObject>();
+    protected int currentEquipped;
+
+    void Awake()
+    {
+        
+    }
     void Start()
     {
 
@@ -17,6 +22,55 @@ public class DefaultEntity : MonoBehaviour , IEntity
     {
 
 
+    }
+    //Finds which weapons are usable by this entity and selects a random default weapon to equip on awake.
+    #region GetUsableWeapons
+    protected void GetUsableWeapons()
+    {
+        if(GetComponentInChildren<MeleeWeapon>()!=null)
+        {
+            MeleeWeapon melee= GetComponentInChildren<MeleeWeapon>();
+            usableWeapons.Add(melee.gameObject);
+        }
+        if(GetComponentInChildren<ShotGun>()!=null)
+        {
+            ShotGun shot= GetComponentInChildren<ShotGun>();
+            usableWeapons.Add(shot.gameObject);
+        }
+        if(GetComponentInChildren<SniperGun>()!=null)
+        {
+            SniperGun snipe= GetComponentInChildren<SniperGun>();
+            usableWeapons.Add(snipe.gameObject);
+        }
+        if(GetComponentInChildren<DefaultGun>()!=null)
+        {
+            DefaultGun pistol= GetComponentInChildren<DefaultGun>();
+            usableWeapons.Add(pistol.gameObject);
+        }
+
+        foreach(GameObject weapon in usableWeapons)
+        {
+            weapon.SetActive(false);
+            Debug.Log(weapon);
+        }
+
+        if(usableWeapons!=null)
+        {
+            SwapWeapon(Randomizer(0,usableWeapons.Count));
+        }
+        else
+        {
+            Debug.Log("This entity doesn't use a weapon.");
+        }
+    }
+    #endregion
+
+    //Used on awake to prepare the entity.
+    protected virtual void SetEntityStats(int hp, float speed)
+    {
+        health=hp;
+        moveSpeed=speed;
+        GetUsableWeapons();
     }
    
     protected virtual void Death()
@@ -29,7 +83,6 @@ public class DefaultEntity : MonoBehaviour , IEntity
         }
         //Destroy object
     }
-
     public virtual void Move(Vector3 targetLocation, Vector3 currentLocation)
     {
         //moves from the currentLocation to the targetLocation gradually.
@@ -42,12 +95,30 @@ public class DefaultEntity : MonoBehaviour , IEntity
     {
         health-=damageReceieved;
         Debug.Log(this + " took " + damageReceieved + " damage. total health is now: " + health);
-        Death();
+        if(health<=0)
+        {
+            Death();
+        }
     }
-
-    public void IAttack()
+     
+     public void SwapWeapon(int weaponType)
     {
+        if(currentEquipped!=null)
+        {
+            HideWeapon();
+            Debug.Log("The player had something equipped.");
+        }
 
+        currentEquipped=weaponType;
+        ShowWeapon();
+    }
+     protected void ShowWeapon()
+    {
+       usableWeapons[currentEquipped].SetActive(true);
     }
 
+    protected void HideWeapon()
+    {
+        usableWeapons[currentEquipped].SetActive(false);
+    }
 }

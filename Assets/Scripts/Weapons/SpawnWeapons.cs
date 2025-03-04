@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class SpawnWeapons : DefaultWeapon
 {
-    public GameObject spawnVolume;
+    [SerializeField]
+     GameObject spawnVolume;
     // Start is called before the first frame update
     void Start()
     {

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &591792987154911996
 Transform:
   m_ObjectHideFlags: 0
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41b58814e82bc242977f2d6f953c4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnVolume: {fileID: 0}
   possibleWeapons:
   - {fileID: 4839032804372705416, guid: 285842331f808de4bbc07d4ac540bd92, type: 3}
-  - {fileID: 1175784871617294201, guid: e7490599ecc74114eb3e4fc6a757de29, type: 3}
   - {fileID: 7673925770789434762, guid: c255c04c88f071a48a77984a8c571d51, type: 3}
   - {fileID: 1175784871617294201, guid: 327221a901b8156449ec49c67ee2ce9f, type: 3}
-  spawnVolume: {fileID: 0}
+  - {fileID: 1175784871617294201, guid: e7490599ecc74114eb3e4fc6a757de29, type: 3}

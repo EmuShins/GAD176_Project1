@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultEnemy : DefaultEntity
+public class DefaultEnemy : DefaultEntity, IEnemy
 {
-    protected Vector3 player;
+    
+
     // Start is called before the first frame update
+    void Awake()
+    {
+        SetEntityStats(50,1f);
+        ShowWeapon();
+    }
+
     void Start()
     {
         
@@ -17,15 +24,8 @@ public class DefaultEnemy : DefaultEntity
         
     }
 
-
-    protected void FindPlayer()
-    {
-        //get object by type Player. set player Vector 3 to that object's location.
-    }
-
     protected virtual void Retreat()
     {
-        FindPlayer();
         //moves in the opposite direction of the player.
     }
 
@@ -33,6 +33,11 @@ public class DefaultEnemy : DefaultEntity
     {
         
         //needs to know what ammo is.
+    }
+
+    public void IAttack()
+    {
+
     }
 
  

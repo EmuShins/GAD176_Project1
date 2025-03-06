@@ -7,19 +7,18 @@ public class DefaultEnemy : DefaultEntity, IEnemy
     protected Transform playerPos;
     protected float rotationSpeed;
 
-
-    // Start is called before the first frame update
     void Awake()
     {
         SetEntityStats(50,1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         FindAngle();
 
     }
+
+    #region Retreat, DropAmmo. Unused functions cut due to time constraints.
 
     protected virtual void Retreat()
     {
@@ -31,7 +30,9 @@ public class DefaultEnemy : DefaultEntity, IEnemy
         
         //needs to know what ammo is.
     }
-    #region IAttack
+    #endregion
+
+    #region IAttack, Almost functional but cut due to time constraints.
     public void IAttack()
     {
        /* This code gives a null reference, do not use.
@@ -68,20 +69,7 @@ public class DefaultEnemy : DefaultEntity, IEnemy
     }
     #endregion
 
-    protected virtual void CanShoot()
-    {
-        IAttack();
-
-    }
-
-    protected override void SetEntityStats(int hp, float speed)
-    {
-        base.SetEntityStats(hp, speed);
-        rotationSpeed=10f;
-        playerPos=FindFirstObjectByType<Player>().GetComponent<Transform>();
-
-    }
-
+    #region FaceTarget, faces the player.
     protected void FaceTarget(Vector3 target)
     {
         
@@ -92,10 +80,10 @@ public class DefaultEnemy : DefaultEntity, IEnemy
         Vector3 finalDirection= Vector3.RotateTowards(transform.forward, faceDirection, stepTime, 0.0f);
 
         transform.rotation= Quaternion.LookRotation(finalDirection);
-      
-
     }
+    #endregion
 
+    #region FindAngle, finds if the player is within this enemy's view range.
     protected virtual void FindAngle()
     {
         Vector3 directionToTarget = playerPos.position - transform.position;
@@ -115,7 +103,18 @@ public class DefaultEnemy : DefaultEntity, IEnemy
             }
         }
     }
+    #endregion
 
+    protected virtual void CanShoot()
+    {
+        IAttack();
+    }
+
+    protected override void SetEntityStats(int hp, float speed)
+    {
+    base.SetEntityStats(hp, speed);
+    rotationSpeed=10f;
+    playerPos=FindFirstObjectByType<Player>().GetComponent<Transform>();
+    }
  
-
 }

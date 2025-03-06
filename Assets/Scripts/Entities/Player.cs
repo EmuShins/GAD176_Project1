@@ -41,9 +41,9 @@ public class Player : DefaultEntity, IPlayer
             Debug.LogWarning("Uhoh! the player was not found. This is really bad!");
 
         }
-
     }
 
+    #region EndGame, unused function cut due to time constraints.
     private void EndGame()
     {
         if(lives<=0)
@@ -52,9 +52,9 @@ public class Player : DefaultEntity, IPlayer
             Time.timeScale=0;
         }
     }
+    #endregion
 
-    //Handles movement input for the player.
-    #region IMoveInput
+    #region IMoveInput, handles movement input for the player.
 
     public void IMoveInput()
     {
@@ -95,6 +95,7 @@ public class Player : DefaultEntity, IPlayer
     }
     #endregion
 
+    #region IWeaponInput, handles weapon inputs for the player.
     public void IWeaponInput()
     {
         if(Input.GetKeyDown(KeyCode.R))
@@ -162,18 +163,18 @@ public class Player : DefaultEntity, IPlayer
 
         }
     }
+    #endregion
     
-    //Performs the Lerp calculations used to move the player. Called from IGetInput.
-    #region IMovePlayer
+
+    #region IMovePlayer, Moves the player.
     public float IMovePlayer(float moveTo, float moveFrom)
     {
        float newPos=Mathf.Lerp(moveFrom,moveTo,moveSpeed*Time.deltaTime);
-        //transform.position += newPos * moveSpeed * Time.deltaTime;
         return newPos;
     }
     #endregion
-    //Moves the camera according to where the mouse cursor is on the screen. Called from IGetInput.
-    #region IMoveCamera
+
+    #region IMoveCamera, Moves the camera according to where the mouse cursor is on the screen.
     public void IMoveCamera()
     {
         float mouseX=Input.GetAxis("Mouse X")*mouseSensitivity;

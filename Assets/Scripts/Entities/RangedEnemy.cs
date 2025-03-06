@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class RangedEnemy : DefaultEnemy
 {
-    // Start is called before the first frame update
     void Awake()
     {
         SetEntityStats(30,1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         FindAngle();

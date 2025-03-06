@@ -4,28 +4,13 @@ using UnityEngine;
 
 public class DefaultEntity : BaseScript
 {
+    [SerializeField]
     protected int health;
     protected float moveSpeed;
-    [SerializeField]
     protected List<GameObject> usableWeapons = new List<GameObject>();
     protected int currentEquipped;
-
-    void Awake()
-    {
-        
-    }
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-
-    }
-    //Finds which weapons are usable by this entity and selects a random default weapon to equip on awake.
-    #region GetUsableWeapons
+  
+    #region GetUsableWeapons, Finds which weapons are usable by this entity and selects a random default weapon to equip on awake.
     protected void GetUsableWeapons()
     {
         if(GetComponentInChildren<MeleeWeapon>()!=null)
@@ -66,6 +51,7 @@ public class DefaultEntity : BaseScript
     }
     #endregion
 
+    #region SetEntityStats, used on awake to prepare the entity.
     //Used on awake to prepare the entity.
     protected virtual void SetEntityStats(int hp, float speed)
     {
@@ -73,7 +59,9 @@ public class DefaultEntity : BaseScript
         moveSpeed=speed;
         GetUsableWeapons();
     }
-   
+   #endregion
+
+    #region Death,TakeDamage. Unused functions cut due to time restraints.
     protected virtual void Death()
     {
         //Default settings for an entity's death
@@ -82,14 +70,6 @@ public class DefaultEntity : BaseScript
              Debug.Log(this + " just died.");
             Destroy(gameObject);
         }
-        //Destroy object
-    }
-    public virtual void Move(Vector3 targetLocation, Vector3 currentLocation)
-    {
-        //moves from the currentLocation to the targetLocation gradually.
-        //.normalized might need to be removed in the future because it may affect the move speed.
-        Vector3 moveTo=Vector3.Lerp(currentLocation,targetLocation,moveSpeed*Time.deltaTime);
-        transform.position += moveTo * moveSpeed * Time.deltaTime;
     }
 
     protected void TakeDamage(int damageReceieved)
@@ -101,6 +81,17 @@ public class DefaultEntity : BaseScript
             Death();
         }
     }
+    #endregion
+
+    #region Move, moves a target with the inputted values.
+     public virtual void Move(Vector3 targetLocation, Vector3 currentLocation)
+    {
+        //moves from the currentLocation to the targetLocation gradually.
+        //.normalized might need to be removed in the future because it may affect the move speed.
+        Vector3 moveTo=Vector3.Lerp(currentLocation,targetLocation,moveSpeed*Time.deltaTime);
+        transform.position += moveTo * moveSpeed * Time.deltaTime;
+    }
+    #endregion
     
     #region Show,Hide and Swap Weapons.
      public void SwapWeapon(int weaponType)

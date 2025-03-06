@@ -5,13 +5,12 @@ using UnityEngine;
 public class MeleeEnemy : DefaultEnemy
 {
     protected float attackSpeed=1f;
-    // Start is called before the first frame update
+
     void Awake()
     {
         SetEntityStats(100,1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         FindAngle();

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6772434472013804519}
+  - component: {fileID: 6878309986098873042}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   - {fileID: 1615550737842322772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6878309986098873042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584337565215174334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d16a6f95f80dfc4bbf7007d18a47c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  usableWeapons: []
 --- !u!1 &4795683530622528333
 GameObject:
   m_ObjectHideFlags: 0

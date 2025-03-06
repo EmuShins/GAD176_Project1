@@ -12,17 +12,13 @@ public class DefaultGun : DefaultWeapon, IGun
     protected float bulletSpeed;
     protected Vector3 bulletOffset;
     public GameObject bulletPrefab;
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
        SetGunSpecs();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     //Reloads the gun when pressing R.
     #region IReload
     public void IReload()
@@ -115,6 +111,7 @@ public class DefaultGun : DefaultWeapon, IGun
     #endregion
     
     //called at start to set the various gun's different specs.
+    #region SetGunSpecs
     public virtual void SetGunSpecs()
     {
         magazine=10;
@@ -126,5 +123,6 @@ public class DefaultGun : DefaultWeapon, IGun
         bulletOffset=new Vector3(0,0.3f,1.3f);
         range=1f;
     }
+    #endregion
 
 }

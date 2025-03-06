@@ -8,17 +8,12 @@ public class WeaponPickup : SpawnWeapons
     private GameObject thisWeapon;
     public GameObject[] possibleWeapons = new GameObject[]{};
    
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SpawnWeapon();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #region If the collider is the player, give them the correct weapon.
     public void OnTriggerEnter(Collider other)
     {
         if(thisWeapon!=null)
@@ -56,6 +51,7 @@ public class WeaponPickup : SpawnWeapons
         }   
         }
     }
+    #endregion
 
     private void SpawnWeapon()
     {

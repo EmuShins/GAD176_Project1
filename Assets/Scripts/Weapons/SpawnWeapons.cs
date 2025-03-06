@@ -7,19 +7,13 @@ public class SpawnWeapons : DefaultWeapon
 {
     [SerializeField]
      GameObject spawnVolume;
-    // Start is called before the first frame update
+    
     void Start()
     {
         SpawnWeaponPickup();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //Spawns 5 random weapons, each in random locations.
+    //Instantiates 5 random weapon pickups, each in random locations.
     public void SpawnWeaponPickup()
     {
         for(int i=0; i<5; i++)

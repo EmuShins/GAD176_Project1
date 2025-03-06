@@ -101,7 +101,8 @@ public class DefaultEntity : BaseScript
             Death();
         }
     }
-     
+    
+    #region Show,Hide and Swap Weapons.
      public void SwapWeapon(int weaponType)
     {
         HideWeapon();
@@ -119,4 +120,5 @@ public class DefaultEntity : BaseScript
     {
         usableWeapons[currentEquipped].SetActive(false);
     }
+    #endregion
 }

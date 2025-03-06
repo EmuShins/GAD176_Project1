@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class ShotGun : DefaultGun, IGun
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetGunSpecs();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-   
     public override void SetGunSpecs()
     {
         base.SetGunSpecs();

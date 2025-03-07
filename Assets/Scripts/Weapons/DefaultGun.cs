@@ -19,7 +19,7 @@ public class DefaultGun : DefaultWeapon, IGun
     }
 
 
-    //Reloads the gun when pressing R.
+    //Reloads the gun.
     #region IReload
     public void IReload()
     {

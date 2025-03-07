@@ -14,7 +14,7 @@ public class SpawnWeapons : DefaultWeapon
     }
 
     //Instantiates 5 random weapon pickups, each in random locations.
-    public void SpawnWeaponPickup()
+    protected void SpawnWeaponPickup()
     {
         for(int i=0; i<5; i++)
         {

@@ -14,18 +14,36 @@ public class Player : DefaultEntity, IPlayer
     private float mouseSensitivity=2f;
     public GameObject playerCamera;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        GetPlayer();
+        SetEntityStats(100,1f);
+        ShowWeapon();
+        Camera playerCam= player.GetComponentInChildren<Camera>();
+        playerCamera= playerCam.gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        IGetInput();
+        IMoveInput();
+        IWeaponInput();
     }
 
+    public void GetPlayer()
+    {
+        player=GetComponent<Player>();
+        if(player!=null)
+        {
+            Debug.Log("Player found succesfully.");
+        }
+        else
+        {
+            Debug.LogWarning("Uhoh! the player was not found. This is really bad!");
+
+        }
+    }
+
+    #region EndGame, unused function cut due to time constraints.
     private void EndGame()
     {
         if(lives<=0)
@@ -33,13 +51,12 @@ public class Player : DefaultEntity, IPlayer
             Debug.Log("Oh no, the player ran out of lives! The game has ended.");
             Time.timeScale=0;
         }
-
     }
+    #endregion
 
-    //Handles input for the player. This includes movement.
-    #region IGetInput
+    #region IMoveInput, handles movement input for the player.
 
-    public void IGetInput()
+    public void IMoveInput()
     {
         //Simple WASD movement
         if (Input.GetKey(KeyCode.W))
@@ -73,28 +90,92 @@ public class Player : DefaultEntity, IPlayer
             transform.position=new Vector3(currentPosition,transform.position.y,transform.position.z);
         }
         //Moves the camera depending on where the mouse is on the screen.
-        MoveCamera();
-        Debug.Log("mousePos is: " + mousePos);
+        IMoveCamera();
+        //Debug.Log("mousePos is: " + mousePos);
     }
     #endregion
 
-    protected virtual void SwapWeapon()
+    #region IWeaponInput, handles weapon inputs for the player.
+    public void IWeaponInput()
     {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            switch(currentEquipped)
+            {
+                case 0:
+                {
+                    return;
+                }
+                case 1:
+                {
+                    ShotGun shot= GetComponentInChildren<ShotGun>();
+                    Debug.Log(shot);
+                    shot.IReload();
+                    return;
+                }
+                case 2:
+                {
+                    SniperGun snipe= GetComponentInChildren<SniperGun>();
+                    Debug.Log(snipe);
+                    snipe.IReload();
+                    return;
+                }
+                case 3:
+                {
+                    DefaultGun pistol= GetComponentInChildren<DefaultGun>();
+                    Debug.Log(pistol);
+                    pistol.IReload();
+                    return;
+                }
+            }
+        }
 
+        if(Input.GetMouseButtonDown(0))
+        {
+            switch(currentEquipped)
+            {
+                case 0:
+                {
+                    return;
+                }
+                case 1:
+                {
+                    ShotGun shot= GetComponentInChildren<ShotGun>();
+                    Debug.Log(shot);
+                    shot.IShoot();
+                    return;
+                }
+                case 2:
+                {
+                    SniperGun snipe= GetComponentInChildren<SniperGun>();
+                    Debug.Log(snipe);
+                    snipe.IShoot();
+                    return;
+                }
+                case 3:
+                {
+                    DefaultGun pistol= GetComponentInChildren<DefaultGun>();
+                    Debug.Log(pistol);
+                    pistol.IShoot();
+                    return;
+                }
+            }
+
+        }
     }
+    #endregion
     
-    //Performs the Lerp calculations used to move the player. Called from IGetInput.
-    #region IMovePlayer
+
+    #region IMovePlayer, Moves the player.
     public float IMovePlayer(float moveTo, float moveFrom)
     {
        float newPos=Mathf.Lerp(moveFrom,moveTo,moveSpeed*Time.deltaTime);
-        //transform.position += newPos * moveSpeed * Time.deltaTime;
         return newPos;
     }
     #endregion
-    //Moves the camera according to where the mouse cursor is on the screen. Called from IGetInput.
-    #region MoveCamera
-    private void MoveCamera()
+
+    #region IMoveCamera, Moves the camera according to where the mouse cursor is on the screen.
+    public void IMoveCamera()
     {
         float mouseX=Input.GetAxis("Mouse X")*mouseSensitivity;
         float mouseY=Input.GetAxis("Mouse Y")*mouseSensitivity;

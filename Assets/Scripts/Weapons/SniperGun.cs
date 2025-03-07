@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class SniperGun : DefaultGun, IGun
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetGunSpecs();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        IShoot();
-        IReload();
     }
 
     public override void SetGunSpecs()

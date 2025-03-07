@@ -12,24 +12,17 @@ public class DefaultGun : DefaultWeapon, IGun
     protected float bulletSpeed;
     protected Vector3 bulletOffset;
     public GameObject bulletPrefab;
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
        SetGunSpecs();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        IReload();
-        IShoot();
-    }
-    //Reloads the gun when pressing R.
+
+    //Reloads the gun.
     #region IReload
     public void IReload()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
            //find how many bullets need to be reloaded into magazine based off of magazine size.
            if(magazine<magazineSize)
            {
@@ -51,17 +44,14 @@ public class DefaultGun : DefaultWeapon, IGun
                 magazine+=reloadAmount;
                 Debug.Log("There was enough ammo to fully reload. the magazine is now: " + magazine + " and the ammo is: " + ammo + ".");
             }
-
            }
-        }
     }
     #endregion
     //Instantiates the bullet at the bulletOffset, then moves it in a direction with rigidbody velocity.
     #region IShoot
     public void IShoot()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
+        
             Debug.Log("Left mouse button pressed.");
             if(magazine>0)
             {
@@ -117,11 +107,11 @@ public class DefaultGun : DefaultWeapon, IGun
             {
                 Debug.Log("There was no ammo left, could not shoot.");
             }
-        }
     }
     #endregion
     
     //called at start to set the various gun's different specs.
+    #region SetGunSpecs
     public virtual void SetGunSpecs()
     {
         magazine=10;
@@ -133,5 +123,6 @@ public class DefaultGun : DefaultWeapon, IGun
         bulletOffset=new Vector3(0,0.3f,1.3f);
         range=1f;
     }
+    #endregion
 
 }

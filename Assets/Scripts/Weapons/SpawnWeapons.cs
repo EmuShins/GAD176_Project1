@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<<< HEAD:Assets/Scripts/Weapons/SpawnWeapons.cs
-public class SpawnWeapons : MonoBehaviour
-========
-public class RangedEnemy : DefaultEnemy
->>>>>>>> feature/Entities:Assets/Scripts/Entities/RangedEnemy.cs
+
+public class SpawnWeapons : DefaultWeapon
 {
-    // Start is called before the first frame update
+    [SerializeField]
+     GameObject spawnVolume;
+    
     void Start()
     {
-        
+        SpawnWeaponPickup();
     }
 
-    // Update is called once per frame
-    void Update()
+    //Instantiates 5 random weapon pickups, each in random locations.
+    protected void SpawnWeaponPickup()
     {
-        
-    }
-
-    public void SpawnWeapon()
-    {
-        
+        for(int i=0; i<5; i++)
+        {
+            Vector3 spawnLocation = new Vector3(Randomizer(-50, 50), 0, Randomizer(-50, 50));
+            Instantiate(spawnVolume, spawnLocation, Quaternion.identity);
+        }
     }
 }

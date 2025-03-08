@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnWeapons : DefaultWeapon
 {
     [SerializeField]
-     GameObject spawnVolume;
+     private GameObject spawnVolume;
     
     void Start()
     {
@@ -14,7 +14,7 @@ public class SpawnWeapons : DefaultWeapon
     }
 
     //Instantiates 5 random weapon pickups, each in random locations.
-    protected void SpawnWeaponPickup()
+    public void SpawnWeaponPickup()
     {
         for(int i=0; i<5; i++)
         {
